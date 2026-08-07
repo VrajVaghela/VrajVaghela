@@ -1,0 +1,2 @@
+# Generated SVGs land here (see .github/workflows/metrics.yml).
+# Tracked so the directory exists before the first workflow run.

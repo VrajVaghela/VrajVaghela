@@ -1,0 +1,64 @@
+# Renders stats cards INSIDE this repo instead of relying on
+# github-readme-stats.vercel.app, which is currently 503 DEPLOYMENT_PAUSED.
+#
+# Requires a repo secret named METRICS_TOKEN (classic PAT, scopes: public_repo + read:user).
+# Without it this workflow is skipped and the README falls back to
+# github-profile-summary-cards. See SETUP.md step 3.
+
+name: Generate Metrics
+
+on:
+  schedule:
+    - cron: "23 4 * * *"
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  metrics:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Overview panel
+        uses: lowlighter/metrics@v3.34
+        continue-on-error: true
+        with:
+          token: ${{ secrets.METRICS_TOKEN }}
+          user: VrajVaghela
+          filename: .github/assets/metrics-overview.svg
+          template: classic
+          base: header, activity, community, repositories, metadata
+          config_timezone: Asia/Kolkata
+          config_display: large
+
+      - name: Language breakdown
+        uses: lowlighter/metrics@v3.34
+        continue-on-error: true
+        with:
+          token: ${{ secrets.METRICS_TOKEN }}
+          user: VrajVaghela
+          filename: .github/assets/metrics-languages.svg
+          base: ""
+          plugin_languages: yes
+          plugin_languages_details: bytes-size, percentage
+          plugin_languages_limit: 8
+          plugin_languages_sections: most-used
+          config_timezone: Asia/Kolkata
+
+      - name: Commit rendered SVGs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A .github/assets
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "chore: refresh metrics [skip ci]"
+            git push
+          fi
