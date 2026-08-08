@@ -5,9 +5,7 @@
    NOTE: GitHub sanitizes README HTML. No <script>, no <style>,
    no CSS classes. All animation arrives as pre-animated SVG.
 
-   THREE PLACEHOLDERS TO FILL IN — search for "TODO":
-     YOUR_LINKEDIN_SLUG · YOUR_X_HANDLE · YOUR_LEETCODE_USERNAME
-   See SETUP.md for the remaining manual steps.
+   See SETUP.md for any additional customization steps.
   ═══════════════════════════════════════════════════════════════
 -->
 
@@ -26,19 +24,13 @@
   />
 </a>
 
-<!-- TODO: replace YOUR_LINKEDIN_SLUG with your linkedin.com/in/<slug> -->
-<a href="https://www.linkedin.com/in/YOUR_LINKEDIN_SLUG/">
+<a href="https://www.linkedin.com/in/vraj-vaghela-950219237/">
   <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
 </a>
 <a href="mailto:vrjvghl@gmail.com">
   <img src="https://img.shields.io/badge/Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" />
 </a>
-<!-- TODO: replace YOUR_X_HANDLE -->
-<a href="https://x.com/YOUR_X_HANDLE">
-  <img src="https://img.shields.io/badge/X-000000?style=for-the-badge&logo=x&logoColor=white" alt="X" />
-</a>
-<!-- TODO: replace YOUR_LEETCODE_USERNAME -->
-<a href="https://leetcode.com/u/YOUR_LEETCODE_USERNAME/">
+<a href="https://leetcode.com/u/vrjvghl/">
   <img src="https://img.shields.io/badge/LeetCode-FFA116?style=for-the-badge&logo=leetcode&logoColor=black" alt="LeetCode" />
 </a>
 <br />
