@@ -12,14 +12,14 @@
 <div align="center">
 
 <img
-  src="https://capsule-render.vercel.app/api?type=waving&color=0:8B5CF6,50:6366F1,100:06B6D4&height=200&section=header&text=Vraj%20Vaghela&fontSize=58&fontColor=ffffff&fontAlignY=36&desc=CS%20Student%20%C2%B7%20Building%20AI%20Products&descAlignY=58&descSize=18&animation=fadeIn"
+  src="https://capsule-render.vercel.app/api?type=waving&color=0:FF5F6D,25:FFC371,50:47E5BC,75:4FACFE,100:B06AB3&height=200&section=header&text=Vraj%20Vaghela&fontSize=58&fontColor=ffffff&fontAlignY=36&desc=CS%20Student%20%C2%B7%20Building%20AI%20Products&descAlignY=58&descSize=18&animation=fadeIn"
   alt="Vraj Vaghela — CS Student building AI products"
   width="100%"
 />
 
 <a href="https://github.com/VrajVaghela">
   <img
-    src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=22&pause=1000&color=8B5CF6&center=true&vCenter=true&width=680&height=60&lines=CS+Student+building+AI+products;Agentic+AI+%C2%B7+RAG+%C2%B7+Multi-Agent+Systems;TypeScript+%C2%B7+Python+%C2%B7+Rust;28+repos+and+counting..."
+    src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=22&pause=1000&color=FF5F6D&center=true&vCenter=true&width=680&height=60&lines=CS+Student+building+AI+products;Agentic+AI+%C2%B7+RAG+%C2%B7+Multi-Agent+Systems;TypeScript+%C2%B7+Python+%C2%B7+Rust;28+repos+and+counting..."
     alt="CS Student building AI products · Agentic AI, RAG, Multi-Agent Systems · TypeScript, Python, Rust"
   />
 </a>
@@ -34,8 +34,8 @@
   <img src="https://img.shields.io/badge/LeetCode-FFA116?style=for-the-badge&logo=leetcode&logoColor=black" alt="LeetCode" />
 </a>
 <br />
-<img src="https://komarev.com/ghpvc/?username=VrajVaghela&style=flat-square&color=8B5CF6&label=profile+views" alt="Profile views" />
-<img src="https://img.shields.io/github/followers/VrajVaghela?style=flat-square&color=8B5CF6&labelColor=1F2937" alt="Followers" />
+<img src="https://komarev.com/ghpvc/?username=VrajVaghela&style=flat-square&color=FFC371&label=profile+views" alt="Profile views" />
+<img src="https://img.shields.io/github/followers/VrajVaghela?style=flat-square&color=47E5BC&labelColor=1F2937" alt="Followers" />
 
 </div>
 
@@ -53,7 +53,7 @@ than just autocomplete.
 - 🤝 Open to collaborating on AI tooling, developer experience, and anything agentic.
 
 <div align="center">
-  <img src="https://quotes-github-readme.vercel.app/api?type=horizontal&theme=tokyonight" alt="Random dev quote" />
+  <img src="https://quotes-github-readme.vercel.app/api?type=horizontal&theme=github_dark&quoteColor=e6edf3&authorColor=FFC371&symbolColor=47E5BC" alt="Random dev quote" />
 </div>
 
 ---
@@ -232,17 +232,17 @@ end-to-end. Equal parts useful tool and study of agent reliability.
 <img src="./.github/assets/metrics-overview.svg" alt="GitHub activity overview" width="100%" />
 -->
 
-<img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=VrajVaghela&theme=github_dark" alt="Profile summary" width="100%" />
+<img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=VrajVaghela&theme=github_dark&title_color=FF5F6D&icon_color=FFC371&text_color=e6edf3" alt="Profile summary" width="100%" />
 
-<img src="https://streak-stats.demolab.com?user=VrajVaghela&theme=tokyonight&hide_border=true&border_radius=8&background=0D1117&ring=8B5CF6&fire=06B6D4&currStreakLabel=8B5CF6" alt="Contribution streak" width="49%" />
-<img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=VrajVaghela&theme=github_dark" alt="Repos per language" width="49%" />
+<img src="https://streak-stats.demolab.com?user=VrajVaghela&theme=dark&hide_border=true&border_radius=8&background=0D1117&ring=47E5BC&fire=FFC371&currStreakNum=47E5BC&currStreakLabel=FFC371&sideNums=e6edf3&sideLabels=8b949e&dates=8b949e&stroke=21262d" alt="Contribution streak" width="49%" />
+<img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=VrajVaghela&theme=github_dark&title_color=FFC371&text_color=e6edf3" alt="Repos per language" width="49%" />
 
-<img src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=VrajVaghela&theme=github_dark" alt="Most committed language" width="49%" />
-<img src="https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=VrajVaghela&theme=github_dark&utcOffset=5.5" alt="Productive time" width="49%" />
+<img src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=VrajVaghela&theme=github_dark&title_color=47E5BC&text_color=e6edf3" alt="Most committed language" width="49%" />
+<img src="https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=VrajVaghela&theme=github_dark&utcOffset=5.5&title_color=4FACFE&text_color=e6edf3&chart_color=B06AB3" alt="Productive time" width="49%" />
 
 ### 📈 Contribution Activity
 
-<img src="https://github-readme-activity-graph.vercel.app/graph?username=VrajVaghela&bg_color=0D1117&color=8B5CF6&line=06B6D4&point=FFFFFF&area=true&area_color=8B5CF6&hide_border=true&custom_title=Commits%20Over%20Time" alt="Contribution activity graph" width="100%" />
+<img src="https://github-readme-activity-graph.vercel.app/graph?username=VrajVaghela&bg_color=0D1117&color=e6edf3&line=4FACFE&point=FF5F6D&area=true&area_color=B06AB3&title_color=4FACFE&hide_border=true&custom_title=Commits%20Over%20Time" alt="Contribution activity graph" width="100%" />
 
 </div>
 
@@ -269,8 +269,8 @@ end-to-end. Equal parts useful tool and study of agent reliability.
 
 <!-- Generated by .github/workflows/3d-contrib.yml — appears after first Actions run. -->
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./profile-3d-contrib/profile-night-view.svg" />
-  <img src="./profile-3d-contrib/profile-green-animate.svg" alt="Contribution calendar rendered as an isometric 3D scene" width="100%" />
+  <source media="(prefers-color-scheme: dark)" srcset="./profile-3d-contrib/profile-night-rainbow.svg" />
+  <img src="./profile-3d-contrib/profile-season-animate.svg" alt="Contribution calendar rendered as an isometric 3D scene" width="100%" />
 </picture>
 
 </details>
@@ -286,7 +286,7 @@ end-to-end. Equal parts useful tool and study of agent reliability.
 Open to collaboration on **AI agents**, **developer tooling**, and **systems work**.
 
 <a href="mailto:vrjvghl@gmail.com">
-  <img src="https://img.shields.io/badge/Reach%20out-vrjvghl%40gmail.com-8B5CF6?style=for-the-badge&logo=gmail&logoColor=white" alt="Email vrjvghl@gmail.com" />
+  <img src="https://img.shields.io/badge/Reach%20out-vrjvghl%40gmail.com-B06AB3?style=for-the-badge&logo=gmail&logoColor=white" alt="Email vrjvghl@gmail.com" />
 </a>
 
 <br /><br />
@@ -294,7 +294,7 @@ Open to collaboration on **AI agents**, **developer tooling**, and **systems wor
 <sub><i>⭐ If something here is useful to you, a star means a lot.</i></sub>
 
 <img
-  src="https://capsule-render.vercel.app/api?type=waving&color=0:06B6D4,50:6366F1,100:8B5CF6&height=140&section=footer"
+  src="https://capsule-render.vercel.app/api?type=waving&color=0:B06AB3,25:4FACFE,50:47E5BC,75:FFC371,100:FF5F6D&height=140&section=footer"
   alt=""
   width="100%"
 />
