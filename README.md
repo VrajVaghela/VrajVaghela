@@ -12,7 +12,7 @@
 <div align="center">
 
 <img
-  src="https://capsule-render.vercel.app/api?type=waving&color=0:FF5F6D,25:FFC371,50:47E5BC,75:4FACFE,100:B06AB3&height=200&section=header&text=Vraj%20Vaghela&fontSize=58&fontColor=ffffff&fontAlignY=36&desc=CS%20Student%20%C2%B7%20Building%20AI%20Products&descAlignY=58&descSize=18&animation=fadeIn"
+  src="https://capsule-render.vercel.app/api?type=waving&color=0:1E3A8A,50:2563EB,100:0891B2&height=200&section=header&text=Vraj%20Vaghela&fontSize=58&fontColor=ffffff&fontAlignY=36&desc=CS%20Student%20%C2%B7%20Building%20AI%20Products&descAlignY=58&descSize=18&animation=fadeIn"
   alt="Vraj Vaghela — CS Student building AI products"
   width="100%"
 />
@@ -294,7 +294,7 @@ Open to collaboration on **AI agents**, **developer tooling**, and **systems wor
 <sub><i>⭐ If something here is useful to you, a star means a lot.</i></sub>
 
 <img
-  src="https://capsule-render.vercel.app/api?type=waving&color=0:B06AB3,25:4FACFE,50:47E5BC,75:FFC371,100:FF5F6D&height=140&section=footer"
+  src="https://capsule-render.vercel.app/api?type=waving&color=0:0891B2,50:2563EB,100:1E3A8A&height=140&section=footer"
   alt=""
   width="100%"
 />
