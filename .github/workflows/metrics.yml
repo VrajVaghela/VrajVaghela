@@ -23,11 +23,19 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
+      - name: Require METRICS_TOKEN
+        run: |
+          if [ -z "${{ secrets.METRICS_TOKEN }}" ]; then
+            echo "::error::METRICS_TOKEN is not set - see SETUP.md step 5."
+            echo "Without it lowlighter/metrics cannot query the GitHub API."
+            exit 1
+          fi
+          echo "METRICS_TOKEN present."
+
       - uses: actions/checkout@v4
 
       - name: Overview panel
         uses: lowlighter/metrics@v3.34
-        continue-on-error: true
         with:
           token: ${{ secrets.METRICS_TOKEN }}
           user: VrajVaghela
@@ -39,7 +47,6 @@ jobs:
 
       - name: Language breakdown
         uses: lowlighter/metrics@v3.34
-        continue-on-error: true
         with:
           token: ${{ secrets.METRICS_TOKEN }}
           user: VrajVaghela

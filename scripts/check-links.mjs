@@ -15,7 +15,12 @@
 import { readFileSync } from 'node:fs';
 
 const README = new URL('../README.md', import.meta.url);
-const text = readFileSync(README, 'utf8');
+const raw = readFileSync(README, 'utf8');
+
+// Strip HTML comments first. Commented-out images (e.g. the metrics panel, which
+// stays disabled until METRICS_TOKEN exists) are not rendered by GitHub, so
+// reporting them as missing assets is a false positive.
+const text = raw.replace(/<!--[\s\S]*?-->/g, '');
 
 const urls = new Set();
 const relative = new Set();
@@ -69,8 +74,14 @@ for (const r of results) {
 }
 
 if (relative.size) {
-  console.log(`\nAction-generated assets (exist only after their workflow runs):`);
-  for (const r of [...relative].sort()) console.log(`  WAIT  ${r}`);
+  console.log(`\nCI-generated assets (checked against origin/main):`);
+  const RAW = 'https://raw.githubusercontent.com/VrajVaghela/VrajVaghela/main/';
+  for (const r of [...relative].sort()) {
+    const res = await probe(RAW + r.replace(/^\.\//, ''));
+    const ok = res.status >= 200 && res.status < 400;
+    if (!ok) realFailures.push(res);
+    console.log(`  ${ok ? 'PASS' : 'FAIL'}  ${String(res.status).padEnd(5)} ${r}`);
+  }
 }
 
 if (pending.length) {

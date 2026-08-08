@@ -87,21 +87,25 @@ Tick **"Show Achievements"** while you're there.
 
 ## 5. Enable the stats card (optional)
 
-The README's top stats panel is rendered by `.github/workflows/metrics.yml` **into this
-repo**, rather than fetched from `github-readme-stats.vercel.app` — that service returned
-`503 DEPLOYMENT_PAUSED` on every attempt while this was built, and its own docs warn the
-public instance is unreliable.
+The README's large overview panel is rendered by `.github/workflows/metrics.yml` **into
+this repo**, rather than fetched from `github-readme-stats.vercel.app` — that service
+returned `503 DEPLOYMENT_PAUSED` on every attempt while this was built, and its own docs
+warn the public instance is unreliable.
 
-To turn it on:
+**It is currently commented out in `README.md`**, because without the token it would render
+as a broken image. To turn it on:
 
 1. Create a **classic** PAT at [github.com/settings/tokens](https://github.com/settings/tokens)
    with scopes `public_repo` and `read:user`.
 2. In this repo: **Settings → Secrets and variables → Actions → New repository secret**
 3. Name it exactly `METRICS_TOKEN`, paste the token.
 4. **Actions** tab → *Generate Metrics* → **Run workflow**.
+5. Once it goes green, delete the two comment markers around the `metrics-overview.svg`
+   `<img>` in `README.md` (search for `METRICS_TOKEN` — it's flagged inline).
 
-**Skipping this is fine.** The README also renders `github-profile-summary-cards`, which
-needs no token and is verified working. You'd just lose the one large overview panel.
+**Skipping this is fine.** The README already renders four `github-profile-summary-cards`
+panels plus the streak card, none of which need a token. You'd only be missing one extra
+panel.
 
 ---
 
