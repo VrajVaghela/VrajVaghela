@@ -11,14 +11,23 @@
 # languages, and READMEs - not written by you. Edit anything that misrepresents the work.
 #
 #   export GH_TOKEN=ghp_xxxx          # classic PAT, 'public_repo' scope
-#   bash scripts/set-repo-metadata.sh            # apply
+#   bash scripts/set-repo-metadata.sh            # fill blanks only (safe default)
 #   DRY_RUN=1 bash scripts/set-repo-metadata.sh  # preview only
+#   FORCE=1   bash scripts/set-repo-metadata.sh  # also OVERWRITE existing values
+#
+# By default this only fills in fields that are currently EMPTY - your own
+# descriptions are never overwritten. Pass FORCE=1 to replace them too.
 #
 set -uo pipefail
 
 USER="VrajVaghela"
 API="https://api.github.com"
 DRY_RUN="${DRY_RUN:-0}"
+FORCE="${FORCE:-0}"
+
+# Payload scratch file (see the --data-binary comment below for why).
+TMP_PAYLOAD=".repo-metadata-payload.json"
+trap 'rm -f "$TMP_PAYLOAD"' EXIT
 
 if [[ -z "${GH_TOKEN:-}" ]]; then
   echo "ERROR: GH_TOKEN is not set."
@@ -57,37 +66,62 @@ keep|Note-taking app inspired by Google Keep.|javascript,react,notes-app,crud
 ENTRIES
 )
 
-ok=0; fail=0; skipped=0
+ok=0; fail=0; skipped=0; kept=0
 
 while IFS='|' read -r repo desc topics; do
   [[ -z "${repo// }" ]] && continue
 
+  # Read current state so we never clobber something you already wrote.
+  cur=$(curl -sS -H "Authorization: Bearer $GH_TOKEN" \
+        -H "Accept: application/vnd.github+json" "$API/repos/$USER/$repo")
+  has_desc=$(node -e 'let d="";process.stdin.on("data",c=>d+=c).on("end",()=>{try{const r=JSON.parse(d);process.stdout.write(r.description?"1":"0")}catch(e){process.stdout.write("0")}})' <<< "$cur")
+  has_topics=$(node -e 'let d="";process.stdin.on("data",c=>d+=c).on("end",()=>{try{const r=JSON.parse(d);process.stdout.write((r.topics&&r.topics.length)?"1":"0")}catch(e){process.stdout.write("0")}})' <<< "$cur")
+
+  do_desc=1; do_topics=1
+  [[ "$has_desc" == "1" && "$FORCE" != "1" ]] && do_desc=0
+  [[ "$has_topics" == "1" && "$FORCE" != "1" ]] && do_topics=0
+
+  if [[ "$do_desc" == "0" && "$do_topics" == "0" ]]; then
+    echo "KEEP $repo (already has description + topics)"
+    kept=$((kept+1))
+    continue
+  fi
+
   if [[ "$DRY_RUN" == "1" ]]; then
     echo "DRY  $repo"
-    echo "       desc:   $desc"
-    echo "       topics: $topics"
+    [[ "$do_desc" == "1" ]]   && echo "       + desc:   $desc"   || echo "       = desc kept"
+    [[ "$do_topics" == "1" ]] && echo "       + topics: $topics" || echo "       = topics kept"
     skipped=$((skipped+1))
     continue
   fi
 
-  # --- description (PATCH /repos/:owner/:repo) ---
-  d_code=$(curl -sS -o /dev/null -w '%{http_code}' \
-    -X PATCH "$API/repos/$USER/$repo" \
-    -H "Authorization: Bearer $GH_TOKEN" \
-    -H "Accept: application/vnd.github+json" \
-    -H "X-GitHub-Api-Version: 2022-11-28" \
-    -d "$(node -e 'process.stdout.write(JSON.stringify({description:process.argv[1]}))' "$desc")")
+  d_code=200
+  if [[ "$do_desc" == "1" ]]; then
+    # Write the payload to a file and use --data-binary. Passing JSON with
+    # non-ASCII (em dashes) through `curl -d "$var"` corrupts the UTF-8 on
+    # Windows/Git Bash and GitHub rejects it with 400 "Problems parsing JSON".
+    node -e 'require("fs").writeFileSync(process.argv[2],JSON.stringify({description:process.argv[1]}))' "$desc" "$TMP_PAYLOAD"
+    d_code=$(curl -sS -o /dev/null -w '%{http_code}' \
+      -X PATCH "$API/repos/$USER/$repo" \
+      -H "Authorization: Bearer $GH_TOKEN" \
+      -H "Accept: application/vnd.github+json" \
+      -H "X-GitHub-Api-Version: 2022-11-28" \
+      --data-binary "@$TMP_PAYLOAD")
+  fi
 
-  # --- topics (PUT /repos/:owner/:repo/topics — replaces the whole set) ---
-  t_code=$(curl -sS -o /dev/null -w '%{http_code}' \
-    -X PUT "$API/repos/$USER/$repo/topics" \
-    -H "Authorization: Bearer $GH_TOKEN" \
-    -H "Accept: application/vnd.github+json" \
-    -H "X-GitHub-Api-Version: 2022-11-28" \
-    -d "$(node -e 'process.stdout.write(JSON.stringify({names:process.argv[1].split(",")}))' "$topics")")
+  t_code=200
+  if [[ "$do_topics" == "1" ]]; then
+    node -e 'require("fs").writeFileSync(process.argv[2],JSON.stringify({names:process.argv[1].split(",")}))' "$topics" "$TMP_PAYLOAD"
+    t_code=$(curl -sS -o /dev/null -w '%{http_code}' \
+      -X PUT "$API/repos/$USER/$repo/topics" \
+      -H "Authorization: Bearer $GH_TOKEN" \
+      -H "Accept: application/vnd.github+json" \
+      -H "X-GitHub-Api-Version: 2022-11-28" \
+      --data-binary "@$TMP_PAYLOAD")
+  fi
 
   if [[ "$d_code" == "200" && "$t_code" == "200" ]]; then
-    echo "OK   $repo"
+    echo "OK   $repo  (desc:$([[ $do_desc == 1 ]] && echo set || echo kept) topics:$([[ $do_topics == 1 ]] && echo set || echo kept))"
     ok=$((ok+1))
   else
     echo "FAIL $repo  (description:$d_code topics:$t_code)"
@@ -97,8 +131,8 @@ done <<< "$ROWS"
 
 echo
 if [[ "$DRY_RUN" == "1" ]]; then
-  echo "Dry run — $skipped repos previewed, nothing changed."
+  echo "Dry run - $skipped repo(s) would change, $kept already complete. Nothing written."
 else
-  echo "Updated $ok repo(s), $fail failed."
+  echo "Updated $ok repo(s), kept $kept untouched, $fail failed."
   [[ "$fail" -gt 0 ]] && echo "A 403 usually means the token is missing the 'public_repo' scope."
 fi
