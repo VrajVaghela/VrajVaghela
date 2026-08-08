@@ -2,8 +2,8 @@
 # github-readme-stats.vercel.app, which is currently 503 DEPLOYMENT_PAUSED.
 #
 # Requires a repo secret named METRICS_TOKEN (classic PAT, scopes: public_repo + read:user).
-# Without it this workflow is skipped and the README falls back to
-# github-profile-summary-cards. See SETUP.md step 3.
+# Without it the job is SKIPPED (not failed), so the Actions tab stays clean, and the
+# README falls back to github-profile-summary-cards. See SETUP.md step 5.
 
 name: Generate Metrics
 
@@ -11,9 +11,6 @@ on:
   schedule:
     - cron: "23 4 * * *"
   workflow_dispatch:
-  push:
-    branches:
-      - main
 
 permissions:
   contents: write
@@ -22,19 +19,24 @@ jobs:
   metrics:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    # The `secrets` context is NOT available in a job-level `if` (only github,
+    # needs, vars, inputs), so it is promoted to env and tested per-step instead.
+    env:
+      HAS_TOKEN: ${{ secrets.METRICS_TOKEN != '' }}
     steps:
-      - name: Require METRICS_TOKEN
+      - name: Report token status
         run: |
-          if [ -z "${{ secrets.METRICS_TOKEN }}" ]; then
-            echo "::error::METRICS_TOKEN is not set - see SETUP.md step 5."
-            echo "Without it lowlighter/metrics cannot query the GitHub API."
-            exit 1
+          if [ "$HAS_TOKEN" = "true" ]; then
+            echo "METRICS_TOKEN found - generating cards."
+          else
+            echo "::notice::METRICS_TOKEN not set, skipping. See SETUP.md step 5."
           fi
-          echo "METRICS_TOKEN present."
 
       - uses: actions/checkout@v4
+        if: env.HAS_TOKEN == 'true'
 
       - name: Overview panel
+        if: env.HAS_TOKEN == 'true'
         uses: lowlighter/metrics@v3.34
         with:
           token: ${{ secrets.METRICS_TOKEN }}
@@ -46,6 +48,7 @@ jobs:
           config_display: large
 
       - name: Language breakdown
+        if: env.HAS_TOKEN == 'true'
         uses: lowlighter/metrics@v3.34
         with:
           token: ${{ secrets.METRICS_TOKEN }}
@@ -59,6 +62,7 @@ jobs:
           config_timezone: Asia/Kolkata
 
       - name: Commit rendered SVGs
+        if: env.HAS_TOKEN == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
