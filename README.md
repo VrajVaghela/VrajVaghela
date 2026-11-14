@@ -19,7 +19,7 @@
 
 <a href="https://github.com/VrajVaghela">
   <img
-    src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=22&pause=1000&color=FF5F6D&center=true&vCenter=true&width=680&height=60&lines=CS+Student+building+AI+products;Agentic+AI+%C2%B7+RAG+%C2%B7+Multi-Agent+Systems;TypeScript+%C2%B7+Python+%C2%B7+Rust;28+repos+and+counting..."
+    src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=22&pause=1000&color=FF5F6D&center=true&vCenter=true&width=680&height=60&lines=CS+Student+building+AI+products;Agentic+AI+%C2%B7+RAG+%C2%B7+Multi-Agent+Systems;TypeScript+%C2%B7+Python+%C2%B7+Rust;30+repos+and+counting..."
     alt="CS Student building AI products · Agentic AI, RAG, Multi-Agent Systems · TypeScript, Python, Rust"
   />
 </a>
@@ -190,7 +190,7 @@ end-to-end. Equal parts useful tool and study of agent reliability.
 | [`crag`](https://github.com/VrajVaghela/crag) | Corrective RAG implementation | `Python` |
 | [`selfrag`](https://github.com/VrajVaghela/selfrag) | Self-RAG — retrieval with self-critique | `Python` |
 | [`chatbot`](https://github.com/VrajVaghela/chatbot) | Conversational agent groundwork | `Python` |
-| [`lagnchain-langgraph-tutorials`](https://github.com/VrajVaghela/lagnchain-langgraph-tutorials) | LangChain / LangGraph working notes | `Jupyter` |
+| [`langchain-langgraph-tutorials`](https://github.com/VrajVaghela/lagnchain-langgraph-tutorials) | LangChain / LangGraph working notes | `Jupyter` |
 
 **Products & Platforms**
 
